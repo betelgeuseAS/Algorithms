@@ -10,20 +10,20 @@
 	color: #fff
 
 body
-	font-size: 16px
-	min-width: 320px
-	position: relative
-	line-height: 1.65
-	font-family: $default-font
-	overflow-x: hidden
-	color: $text
-	input, textarea
-		border: #666 1px solid
-		outline: none
-		&:focus:required:invalid
-			border-color: red
-		&:required:valid
-			border-color: green
+  font-size: 16px
+  min-width: 320px
+  //position: relative
+  line-height: 1.65
+  font-family: $default-font
+  overflow-x: hidden
+  color: $text
+  input, textarea
+    border: #666 1px solid
+    outline: none
+    &:focus:required:invalid
+      border-color: red
+    &:required:valid
+      border-color: green
 
 .img-responsive
 	display: block
@@ -32,17 +32,122 @@ body
 	&.img-width
 		width: 100%
 
-.text-center
-	text-align: center
-
 b, strong
 	font-weight: bold
+
+.link
+  text-decoration: none
+  color: $text
+  background: rgba($colorTwo, .4)
+  border-bottom: 1px solid rgba($text, .4)
+  padding-bottom: 1px
+  transition: background .25s
+  &:link, &:visited, &:active
+    color: $text
+    &:hover
+      text-decoration: none
+      background: rgba($colorTwo, .8)
+      border-bottom: 1px solid rgba($text, .9)
+
+.tip
+  padding: 20px
+  margin-top: 5px
+  margin-bottom: 5px
+  &Warning
+    background: rgba($colorThree, .4)
+    border-left: 8px solid $colorThree
+  &Success
+    background: rgba($colorFour, .4)
+    border-left: 8px solid $colorFour
+  &Danger
+    background: rgba($colorFive, .4)
+    border-left: 8px solid $colorFive
 
 //-------------------------------------------------------------------------------
 //Main
 //-------------------------------------------------------------------------------
+header
+  position: fixed
+  width: 100%
+  z-index: 5
+  color: $colorOne
+  background: $accent
+  .name
+    margin-top: 5px
+    font-size: .8em
+    a
+      color: $colorTwo
+      text-decoration: none
+      transition: color .25s
+      &:link, &:visited, &:active
+        color: $colorTwo
+      &:hover
+        text-decoration: none
+        color: $colorTwo
+  ul
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 60px
+    text-align: right
+    list-style-type: none
+    margin: 0
+    padding: 0
+    li
+      display: inline-block
+      margin-right: 20px
+      &:last-child
+        margin-right: 0
+      a
+        color: $colorOne
+        text-decoration: none
+        transition: color .25s
+        &:link, &:visited, &:active
+          color: $colorOne
+        &:hover
+          text-decoration: none
+          color: $colorTwo
 
+section
+  padding-top: 80px
+  padding-bottom: 30px
+  h1
+    font-size: 1.5em
+  h2, h3
+    font-size: 1.2em
+  .leftSide, .rightSide
+    width: 100%
+    height: 100%
+  .rightSide
+    padding: 25px
+    background: rgba($accent, .1)
+    ul
+      list-style-type: none
+      margin: 0
+      padding: 0
+      li
+        padding-left: 10px
+        border-left: 3px solid transparent
+        a
+          color: $text
+          &:link, &:visited, &:active
+            color: $text
+          &:hover
+            text-decoration: none
+            color: rgba($text, .5)
+      li.active
+        font-weight: bold
+        border-color: $colorTwo
+        padding-left: 10px
 
+footer
+  color: $colorOne
+  background: $accent
+  padding-top: 10px
+  .link
+    color: $colorOne
+    &:link, &:visited, &:active
+      color: $colorOne
 //-------------------------------------------------------------------------------
 //Media
 //-------------------------------------------------------------------------------
