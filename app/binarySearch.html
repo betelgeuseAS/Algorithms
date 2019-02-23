@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <!-- <base href="/"> -->
+
+  <title>Binary Search</title>
+  <meta name="description" content="">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Template Basic Images Start -->
+  <meta property="og:image" content="path/to/image.jpg">
+  <link rel="icon" href="img/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
+  <!-- Template Basic Images End -->
+
+  <!-- Custom Browsers Color Start -->
+  <meta name="theme-color" content="#000">
+  <!-- Custom Browsers Color End -->
+
+  <link rel="stylesheet" href="css/main.min.css">
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-8">
+          <div class="name">
+            <h1><a href="index.html"><i class="fa fa-sun-o" aria-hidden="true"></i> Algorithms</a></h1>
+          </div>
+        </div>
+        <div class="col-4">
+          <ul>
+            <li><a target="_blank" href="https://github.com/betelgeuseAS/Algorithms">GitHub <i class="fa fa-link" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 col-sm-12">
+          <div class="leftSide">
+            <h1>Бинарный поиск</h1>
+            <p>Предположим, вы ищете фамилию человека в телефонной книге. Она начинается с буквы «К». Конечно, можно начать с самого начала и перелистывать страницы, пока вы не доберетесь до буквы «К». Но скорее всего для ускорения поиска лучше раскрыть книгу на середине: ведь буква «К» должна находиться гдето ближе к середине телефонной книги.</p>
+            <p>Или предположим, что вы ищете слово в словаре, и оно начинается с буквы «0». И снова лучше на чать с середины. </p>
+            <p>Теперь допустим, что вы вводите свои данные при входе на Facebook. При этом Facebook необходимо проверить, есть ли у вас учетная запись на сайте. Для этого ваше имя пользователя нужно найти в базе данных. Допустим, вы выбрали себе имя пользователя «karlrnageddon». Facebook может начать с буквы А и проверять все подряд, но разумнее будет начать с середины.</p>
+            <p>Перед нами типичная задача поиска. И во всех этих случаях для решения задачи можно применить один алгоритм: <em>бинарный поиск</em>.</p>
+            <p>Бинарный поиск - это алгоритм; на входе он получает отсортированный список элементов (позднее я объясню, почему он должен быть отсортирован). Если элемент, который вы ищете, присутствует в списке, то бинарный поиск возвращает ту позицию, в которой он был найден. В противном случае бинарный поиск возвращает null.</p>
+            <p>Например:</p>
+
+            <img src="img/algorithms/Binary%20search/bs01.jpg" class="img-responsive" alt="Binary search">
+
+            <p>Рассмотрим пример того, как работает бинарный поиск. Сыграем в простую игру: я загадал число от 1до100.</p>
+
+            <img src="img/algorithms/Binary%20search/bs02.jpg" class="img-responsive" alt="Binary search">
+
+            <p>Вы должны отгадать мое число, использовав как можно меньше попыток. При каждой попытке я буду давать один из трех ответов: «мало», «много» или «угадал».</p>
+            <p>Предположим, вы начинаете перебирать все варианты подряд: 1, 2, 3, 4... Вот как это будет выглядеть.</p>
+
+            <img src="img/algorithms/Binary%20search/bs03.jpg" class="img-responsive" alt="Binary search">
+
+            <p>Это пример простого поиска (возможно, термин «тупой поиск» был бы уместнее). При каждой догадке исключается только одно число. Если я загадал число 99, то, чтобы добраться до него, потребуется 99 попыток!</p>
+            <p>Существует другой, более эффективный способ. Начнем с 50.</p>
+
+            <img src="img/algorithms/Binary%20search/bs04.jpg" class="img-responsive" alt="Binary search">
+
+            <p>Слишком мало ... но вы только что исключили половину чисел! Теперь вы знаете, что все числа 1-50 меньше загаданного. Следующая попытка: 75.</p>
+
+            <img src="img/algorithms/Binary%20search/bs05.jpg" class="img-responsive" alt="Binary search">
+
+            <p>На этот раз перелет... Но вы снова исключили половину оставшихся чисел! С бинарным поиском вы каждый раз загадываете число в середине диапазона и исключаете половину оставшихся чисел. Следующим будет число 63 (по середине между 50 и 75).</p>
+
+            <img src="img/algorithms/Binary%20search/bs06.jpg" class="img-responsive" alt="Binary search">
+
+            <p>Так работает бинарный поиск. Попробуем поточнее определить, сколько чисел будет исключаться каждый раз.</p>
+
+            <img src="img/algorithms/Binary%20search/bs07.jpg" class="img-responsive" alt="Binary search">
+
+            <p><strong>При бинарном поиске каждый раз исключается половина чисел.</strong></p>
+            <p>Какое бы число я ни задумал, вы гарантированно сможете угадать его не более чем за 7 попыток, потому что с каждой попыткой исключается половина оставшихся чисел!</p>
+            <p>Предположим, вы ищете слово в словаре с 240 ООО словами. Как вы думаете, сколько попыток вам понадобится в худшем случае?</p>
+            <p>При простом поиске может потребоваться 240 ООО попыток, если искомое слово находится на самой последней позиции в книге. С каждым шагом бинарного поиска количество слов сокращается вдвое, пока не останется только одно слово.</p>
+
+            <img src="img/algorithms/Binary%20search/bs08.jpg" class="img-responsive" alt="Binary search">
+
+            <p>Итак, бинарный поиск потребует 18 шагов - заметная разница! В общем случае для списка из <em>n</em> элементов бинарный поиск выполняется за <em>log<sub>2</sub>n</em> шагов, тогда как простой поиск будет выполнен за <em>n</em> шагов.</p>
+
+            <div class="tip tipWarning">
+              <h4>Логарифмы</h4>
+              <p>Возможно, вы уже забыли, что такое логарифмы, но навернека помните, что такое возведение в степень. log<sub>10</sub>100 по сути означает, сколько раз нужно перемножить 10, чтобы получилось 100. Правильный ответ - 2: 10 x 10. Итак, log<sub>10</sub>100 = 2. Логарифм по смыслу противоположен  возвидению в степень.</p>
+              <img src="img/maths/logarithms.jpg" class="img-responsive alignCenter" alt="Logarithms">
+              <strong class="alignCenter">Логарифм - операция, обратная возведению в степень</strong>
+              <p>Когда будет упоминатся «О-большое» (об этом позднее), log всегда означает log<sub>2</sub>. Когда вы ищете элемент с применением простого поиска, в худшем случае вам придется проверить каждый элемент. Итак, для поиска из 8 чисел понадобится не более 8 проверок. Для бинарного поиска в худшем случае потребуется не более log<sub>n</sub> проверок. Для списка из 8 элементов log<sub>8</sub> = 3, потому что 2<sup>3</sup> = 8. Итак для списка из 8 чисел вам придется проверить не более 3 чисел. Для списка из 1024 элементов log 1024 = 10, потому что 2<sup>10</sup> = 1024. Следовательно, для списка из 1024 чисел придется проверить не более 10 чисел.</p>
+            </div>
+
+            <div class="tip tipDanger">
+              <h4>ПРИМЕЧАНИЕ</h4>
+              <p>Бинарный поиск работает только в том случае, если список отсортирован. Например, имена в телефонной книге хранятся в алфавитном порядке, и вы можете воспользоваться бинарным поиском.</p>
+            </div>
+
+            <hr>
+
+            <h3>Реализация</h3>
+            <p>Посмотрим, как написать реализацию бинарного поиска на JavaScript.</p>
+            <p>Функция <em>binarySearch</em> получает отсортированный массив и значение. Если значение присутствует в массиве, то функция возвращает его позицию. Если значение не будет найдено, возвращается -1. При этом мы должны следить за тем, в какой части массива проводится поиск. Вначале это весь массив.</p>
+
+            <img src="img/algorithms/Binary%20search/bs09.jpg" class="img-responsive" alt="Binary search">
+
+            <p>Каждый раз алгоритм проверяет средний элемент.</p>
+            <p>Если названное число было слишком мало, то переменная low обновляется соответственно.</p>
+            <p>А если догадка была слишком велика, то обновляется переменная high.</p>
+
+            <img src="img/algorithms/Binary%20search/bs10.jpg" class="img-responsive" alt="Binary search">
+
+            <p>Полный код выглядит так:</p>
+
+            <img src="img/algorithms/Binary%20search/bscode01.svg" class="img-responsive" alt="Binary search">
+
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-12">
+          <div class="rightSide">
+            <ul>
+              <li class="active"><a href="binarySearch.html">Бинарный поиск</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <p>На основе книги <a class="link" target="_blank" href="https://www.manning.com/books/grokking-algorithms">Grokking Algorithms</a> - Aditya Y. Bhargava</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!--Hamburger menu:-->
+  <div class="hamburger">
+    <div class="buttonContainer">
+      <span class="top"></span>
+      <span class="middle"></span>
+      <span class="bottom"></span>
+    </div>
+  </div>
+
+
+  <script src="js/algorithms/binarySearch.js"></script>
+  <script src="js/scripts.min.js"></script>
+</body>
+</html>

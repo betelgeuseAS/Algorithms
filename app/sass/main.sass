@@ -51,8 +51,10 @@ b, strong
 
 .tip
   padding: 20px
-  margin-top: 5px
-  margin-bottom: 5px
+  margin-top: 15px
+  margin-bottom: 15px
+  box-shadow: rgba($accent, 1) 3px 3px 30px -10px
+  border-radius: 3px
   &Warning
     background: rgba($colorThree, .4)
     border-left: 8px solid $colorThree
@@ -62,6 +64,11 @@ b, strong
   &Danger
     background: rgba($colorFive, .4)
     border-left: 8px solid $colorFive
+
+.alignCenter
+  text-align: center
+  display: block
+  margin: 0 auto
 
 //-------------------------------------------------------------------------------
 //Main
@@ -171,7 +178,8 @@ $button-width: 50px
   border-radius: 50%
   background: $accent
   cursor: pointer
-  box-shadow: rgba($accent, 1) 0px 0px 20px
+  box-shadow: rgba($accent, 1) 0 0 20px
+  border: 1px solid gray
   display: none
   .buttonContainer
     position: relative
