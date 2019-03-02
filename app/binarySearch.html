@@ -121,7 +121,25 @@
 
             <p>Полный код выглядит так:</p>
 
-            <img src="img/algorithms/Binary%20search/bscode01.svg" class="img-responsive" alt="Binary search">
+<pre data-src-loaded><code class="language-javascript">
+  const binarySearch = (value, list) => {
+    let low = 0; // начальный индекс в массиве
+    let high = list.length - 1; // конечный индекс
+    let position = -1;
+
+    while (low <= high) { //пока эта часть не сократится до одного элемента...
+      let middle = Math.floor((low + high) / 2); //... проверяем средний элемент
+      if (list[middle] === value) {
+        return middle;
+      } else if (list[middle] > value){ //значение в нижней части массива
+        high = middle - 1;
+      } else { //значение в верхней части массива
+        low = middle + 1;
+      }
+    }
+    return position; //значение не существует
+  };
+</code></pre>
 
           </div>
         </div>
