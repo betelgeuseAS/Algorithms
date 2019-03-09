@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <!-- <base href="/"> -->
+
+  <title>Algorithms - Home</title>
+  <meta name="description" content="">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Template Basic Images Start -->
+  <meta property="og:image" content="path/to/image.jpg">
+  <link rel="icon" href="img/favicon/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon-180x180.png">
+  <!-- Template Basic Images End -->
+
+  <!-- Custom Browsers Color Start -->
+  <meta name="theme-color" content="#000">
+  <!-- Custom Browsers Color End -->
+
+  <link rel="stylesheet" href="css/main.min.css">
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <div class="name">
+          <h1><a href="index.html"><i class="fa fa-sun-o" aria-hidden="true"></i> Algorithms</a></h1>
+        </div>
+      </div>
+      <div class="col-4">
+        <ul>
+          <li><a target="_blank" href="https://github.com/betelgeuseAS/Algorithms">GitHub <i class="fa fa-link" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-sm-12">
+        <div class="leftSide">
+          <h1>Рекурсия</h1>
+          <p>Допустим, вы разбираете чулан своей бабушки и натыкаетесь на загадочный запертый чемодан.</p>
+
+          <img src="img/algorithms/Recursion/r01.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Бабушка говорит, что ключ к чемодану, скорее всего, лежит в коробке.</p>
+
+          <img src="img/algorithms/Recursion/r02.jpg" class="img-responsive" alt="Recursion">
+
+          <p>В коробке лежат другие коробки, а в них лежат маленькие коробочки. Ключ находится где-то там. Какой алгоритм поиска ключа предложите вы?</p>
+          <p>Одно из решений может выглядеть так:</p>
+
+          <img src="img/algorithms/Recursion/r03.jpg" class="img-responsive" alt="Recursion">
+
+          <ol>
+            <li>Сложить все коробки в кучу.</li>
+            <li>Взять коробку и открыть.</li>
+            <li>Если внутри лежит коробка, добавить ее в кучу для последующего поиска.</li>
+            <li>Если внутри лежит ключ, поиск закончен!</li>
+            <li>Повторить.</li>
+          </ol>
+          <p>Есть и альтернативное решение.</p>
+
+          <img src="img/algorithms/Recursion/r04.jpg" class="img-responsive" alt="Recursion">
+
+          <ol>
+            <li>Просмотреть содержимое коробки.</li>
+            <li>Если вы найдете коробку, вернуться к шагу 1.</li>
+            <li>Если вы найдете ключ, поиск закончен!</li>
+          </ol>
+          <p>Какое решение кажется вам более простым?</p>
+          <p>Оба решения делают одно и то же, но второе решение кажется мне более понятным. Рекурсия применяется тогда, когда решение становится более понятным. Применение рекурсии не ускоряет работу программы: более того, решение с циклами иногда работает быстрее.</p>
+
+          <hr>
+
+          <h3>Базовый случай и рекурсивный случай</h3>
+          <p>Так как рекурсивная функция вызывает сама себя, программисту легко ошибиться и написать функцию так, что возникнет бесконечный цикл. Предположим, вы хотите написать функцию для вывода обратного отсчета:</p>
+          <p>&gt; 3...2...1</p>
+          <p>Ее можно записать в рекурсивном виде:</p>
+
+<pre data-src-loaded><code class="language-javascript">
+  function countDown(i) {
+    console.log(i)
+    countDown(i-1);
+  }
+  countDown(3);
+</code></pre>
+
+          <p>И тут возникает проблема: эта функция выполняется бесконечно!</p>
+          <p>&gt; 3...2...1...0...-1...-2...</p>
+          <p>Когда вы пишете рекурсивную функцию, в ней необходимо указать, в какой момент следует прервать рекурсию. Вот почему <em>каждая рекурсивная функция состоит из двух частей: базового случая и рекурсивного случая</em>. В рекурсивном случае функция вызывает сама себя. В базовом случае функция себя не вызывает... чтобы предотвратить зацикливание.</p>
+          <p>Добавим базовый случай в функцию countDown:</p>
+
+<pre data-src-loaded><code class="language-javascript">
+  function countDown(i) {
+    console.log(i)
+
+    if(i <= 0) //Базовый случай
+      return
+    else //Рекурсивный случай
+      countDown(i-1);
+  }
+  countDown(3);
+</code></pre>
+
+          <p>Теперь функция работает так, как было задумано.</p>
+
+          <hr>
+
+          <h3>Стек</h3>
+          <p>В этом разделе рассматривается стек вызовов. Концепция стека вызовов играет важную роль в программировании вообще; кроме того, ее важно понимать при использовании рекурсии.</p>
+          <p>Предположим, вы устраиваете вечеринку с барбекю. Вы составляете список задач и записываете дела на листках.</p>
+          <p>Задачи, то есть элементы списка, можно добавлять и удалять в произвольных позициях списка. Стопка листков работает куда проще. Новые (вставленные) элементы добавляются в начало списка, то есть на верх стопки. Читается только верхний элемент, и он исключается из списка. Таким образом, список задач поддерживает всего два действия: занесение (вставка) и извлечение (выведение из списка и чтение.)</p>
+
+          <img src="img/algorithms/Recursion/r05.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Посмотрим, как работает список задач:</p>
+
+          <img src="img/algorithms/Recursion/r06.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Такая структура данных называется стеком. Стек - простая структура данных.</p>
+
+          <hr>
+
+          <h3>Стек вызовов</h3>
+          <p>Во внутренней работе вашего компьютера используется стек, называемый <em>стеком вызовов</em>. Давайте посмотрим, как он работает. Предположим, имеется простая функция:</p>
+
+<pre data-src-loaded><code class="language-javascript">
+  const greet = (name) => {
+    console.log(`Hello, ${name}!`);
+    greet2(name);
+    console.log('Getting ready to say bye...');
+    bye();
+  }
+</code></pre>
+
+          <p>Эта функция приветствует вас, после чего вызывает две другие функции. Вот эти две функции:</p>
+
+<pre data-src-loaded><code class="language-javascript">
+  const greet2 = (name) => {
+    console.log(`How are you, ${name}?`);
+  }
+  const bye = () => {
+    console.log('Ok bye!');
+  }
+</code></pre>
+
+          <p>Разберемся, что происходит при вызове функции.</p>
+          <p>Предположим, в программе используется вызов <strong>greet("maggie")</strong>. Сначала ваш компьютер выделяет блок памяти для этого вызова функции.</p>
+
+          <img src="img/algorithms/Recursion/r07.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Затем эта память используется. Переменной <strong>name</strong> присваивается значение <strong>"maggie"</strong>; оно должно быть сохранено в памяти.</p>
+
+          <img src="img/algorithms/Recursion/r08.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Каждый раз, когда вы вызываете функцию, компьютер сохраняет в памяти значения всех переменных для этого вызова. Далее выводится приветствие <strong>hello, maggie!</strong>, после чего следует второй вызов <strong>greet2("maggie")</strong>. И снова компьютер выделяет блок памяти для вызова функции.</p>
+
+          <img src="img/algorithms/Recursion/r09.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Ваш компьютер объединяет эти блоки в стек. Второй блок создается над первым. Вы выводите сообщение <strong>how are you, maggie?</strong>, после чего возвращаете управление из вызова функции. Когда это происходит, блок на вершине стека извлекается из него.</p>
+
+          <img src="img/algorithms/Recursion/r10.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Теперь верхний блок в стеке относится к функции <strong>greet</strong>; это означает, что вы вернулись к функции <strong>greet</strong>. При вызове функции <strong>greet2</strong> функция <strong>greet</strong> еще не была завершена. Здесь-то и скрывается истинный смысл этого раздела: <em>когда вы вызываете функцию из другой функции, вызывающая функция приостанавливается в частично завершенном состоянии.</em>  Все значения переменных этой функции остаются в памяти. А когда выполнение функции <strong>greet2</strong> будет завершено, вы вернетесь к функции <strong>greet</strong> и продолжите ее выполнение с того места, где оно прервалось. Сначала выводится сообщение <strong>getting ready to say Ьуе...</strong>, после чего вызывается функция <strong>bуе</strong>.</p>
+
+          <img src="img/algorithms/Recursion/r11.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Блок для этой функции добавляется на вершину стека. Далее выводится сообщение <strong>ok bуе!</strong> с выходом из вызова функции.</p>
+
+          <img src="img/algorithms/Recursion/r12.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Управление снова возвращается функции <strong>greet</strong>. Делать больше нечего, так что управление возвращается и из функции <styrong>greet</styrong>. Этот стек, в котором сохранялись переменные разных функций, называется <em>стеком вызовов</em>.</p>
+
+          <hr>
+
+          <h3>Стек вызовов с рекурсией</h3>
+          <p>Рекурсивные функции тоже используют стек вызовов! Посмотрим, как это делается, на примере функции вычисления факториала. Вызов factorial(5) записывается в виде 5! и определяется следующим образом: 5! = 5*4*3*2*1. По тому же принципу factorial(З) соответствует 3*2*1. Рекурсивная функция для вычисления факториала числа выглядит так:</p>
+
+<pre data-src-loaded><code class="language-javascript">
+  const fact = (x) => {
+    if(x == 1)
+      return 1;
+    else
+      return x * fact(x-1);
+  }
+</code></pre>
+
+          <p>В программу включается вызов <strong>fact(З)</strong>. Проанализируем этот вызов строку за строкой и посмотрим, как изменяется стек вызовов. Стоит напомнить, что верхний блок в стеке сообщает, какой вызов <strong>fact</strong> является текущим.</p>
+
+          <img src="img/algorithms/Recursion/r13.jpg" class="img-responsive" alt="Recursion">
+
+          <img src="img/algorithms/Recursion/r14.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Здесь важно, что каждый вызов создает собственную копию х. Обратиться к переменной х, принадлежащей другой функции, невозможно.</p>
+          <p>Стек играет важную роль в рекурсии. В начальном примере были представлены два решения поиска ключа. Вспомните, как выглядел первый:</p>
+
+          <img src="img/algorithms/Recursion/r03.jpg" class="img-responsive" alt="Recursion">
+
+          <p>В этом случае все коробки лежат в одном месте и вы всегда знаете, в каких коробках еще нужно искать ключ.</p>
+
+          <img src="img/algorithms/Recursion/r15.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Но в рекурсивном решении никакой кучи не существует.</p>
+
+          <img src="img/algorithms/Recursion/r04.jpg" class="img-responsive" alt="Recursion">
+
+          <p>Если кучи нет, то как ваш алгоритм узнает, в каких коробках еще нужно искать? Пример:</p>
+
+          <img src="img/algorithms/Recursion/r16.jpg" class="img-responsive" alt="Recursion">
+
+          <p>К этому моменту стек вызовов выглядит примерно так:</p>
+
+          <img src="img/algorithms/Recursion/r17.jpg" class="img-responsive" alt="Recursion">
+
+          <p>"Куча коробок" хранится в стеке! Это стек незавершенных вызовов функции, каждый из которых ведет собственный незаконченный список коробок для поиска. Стек в данном случае особенно удобен, потому что вам не нужно отслеживать коробки самостоятельно - стек делает это за вас.</p>
+          <p>Стек удобен, но у него есть своя цена: сохранение всей промежуточной информации может привести к значительным затратам памяти. Каждый вызов функции занимает не много памяти, но если стек станет слишком высоким, это будет означать, что ваш компьютер сохраняет информацию по очень многим вызовам. На этой стадии есть два варианта:</p>
+          <ul>
+            <li>Переписать код с использованием цикла.</li>
+            <li>Иногда можно воспользоваться так называемой <em>хвостовой рекурсией</em>. Это непростая тема, вдобавок она поддерживается далеко не во всех языках.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-md-3 col-sm-12">
+        <div class="rightSide">
+          <ul>
+            <li class="active"><a href="recursion.html">Рекурсия</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <p>На основе книги <a class="link" target="_blank" href="https://www.manning.com/books/grokking-algorithms">Grokking Algorithms</a> - Aditya Y. Bhargava</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!--Hamburger menu:-->
+<div class="hamburger">
+  <div class="buttonContainer">
+    <span class="top"></span>
+    <span class="middle"></span>
+    <span class="bottom"></span>
+  </div>
+</div>
+
+
+<script src="js/scripts.min.js"></script>
+</body>
+</html>
