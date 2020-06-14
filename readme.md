@@ -4,9 +4,9 @@ Algorithms, their explanation and implementation on JS.
 ---
 
 ## Technologies
-* `HTML` / `*`
+* `HTML`
 * `CSS` / `Sass`
-* `JavaScript` / `*`
+* `JavaScript`
 
 ## Quickstart
 1. `git clone https://github.com/betelgeuseAS/Algorithms.git`
